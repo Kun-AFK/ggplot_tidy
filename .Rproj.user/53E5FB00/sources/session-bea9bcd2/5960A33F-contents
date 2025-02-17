@@ -1,0 +1,16 @@
+library("tidyverse")
+library("ds4ling")
+
+glimpse(test_scores_rm)
+
+
+cor(test_scores_rm$test1, test_scores_rm$test2)
+
+test_scores_rm |>
+  ggplot() +
+  aes(x = test1, y = test2) +
+  geom_point()
+
+
+
+cor.test(test_scores_rm$test1, test_scores_rm$test2)

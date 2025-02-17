@@ -1,0 +1,8 @@
+"0","#| label: some-plot"
+"0",""
+"0","# This is our template"
+"0","mtcars |>"
+"0","  ggplot() +"
+"0","  aes(x = disp, y = mpg) + #We add a layer to the plot"
+"0","  geom_point()"
+"0",""

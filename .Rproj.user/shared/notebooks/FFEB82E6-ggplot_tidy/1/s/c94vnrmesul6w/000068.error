@@ -1,0 +1,1 @@
+{"frames":[{"func":"summarize(group_by(mtcars, cyl), avg = mean(mpg), std = sd(mpg), \n    mn = min(mpg), mx = max(mpg))","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in summarize(group_by(mtcars, cyl), avg = mean(mpg), std = sd(mpg),  : \n  argument \"by\" is missing, with no default\n"}
