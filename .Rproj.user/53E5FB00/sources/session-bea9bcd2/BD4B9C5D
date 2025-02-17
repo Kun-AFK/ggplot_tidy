@@ -3,7 +3,7 @@
     "path": "C:/Users/zhang/OneDrive/Desktop/ggplot_tidy/ggplot_tidy.Rmd",
     "project_path": "ggplot_tidy.Rmd",
     "type": "r_markdown",
-    "hash": "3146239918",
+    "hash": "2059878966",
     "contents": "",
     "dirty": false,
     "created": 1739208141713.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "185,0",
-        "scrollLine": "171"
+        "cursorPosition": "10,20",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1739815936,
+    "lastKnownWriteTime": 1739816612,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1739815936527,
+    "last_content_update": 1739816612307,
     "read_only": false,
     "read_only_alternatives": []
 }

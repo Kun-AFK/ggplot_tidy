@@ -368,19 +368,6 @@ display: none;
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(&quot;ggplot2&quot;)
-library(&quot;Hmisc&quot;)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Hmisc&#39;
-## 
-## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     src, summarize
-## 
-## The following objects are masked from &#39;package:base&#39;:
-## 
-##     format.pval, units</code></pre>
-<pre class="r"><code>library(&quot;dplyr&quot;)</code></pre>
 <pre class="r"><code>glimpse(mtcars)</code></pre>
 <pre><code>## Rows: 32
 ## Columns: 11
@@ -456,56 +443,285 @@ mtcars |&gt;
     geom = &#39;pointrange&#39;
   )</code></pre>
 <p><img role="img" src="data:image/png;base64,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" width="672" /></p>
-<pre class="r"><code># Select column with &#39;select()&#39;， select()有重命名的功能
+<pre class="r"><code>mtcars</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre class="r"><code># Select column with &#39;select()&#39;， pick columns form dataframe, select()有重命名的功能
 mtcars |&gt;
-  select(mpg, poo = disp, am)</code></pre>
-<pre><code>##                      mpg   poo am
-## Mazda RX4           21.0 160.0  1
-## Mazda RX4 Wag       21.0 160.0  1
-## Datsun 710          22.8 108.0  1
-## Hornet 4 Drive      21.4 258.0  0
-## Hornet Sportabout   18.7 360.0  0
-## Valiant             18.1 225.0  0
-## Duster 360          14.3 360.0  0
-## Merc 240D           24.4 146.7  0
-## Merc 230            22.8 140.8  0
-## Merc 280            19.2 167.6  0
-## Merc 280C           17.8 167.6  0
-## Merc 450SE          16.4 275.8  0
-## Merc 450SL          17.3 275.8  0
-## Merc 450SLC         15.2 275.8  0
-## Cadillac Fleetwood  10.4 472.0  0
-## Lincoln Continental 10.4 460.0  0
-## Chrysler Imperial   14.7 440.0  0
-## Fiat 128            32.4  78.7  1
-## Honda Civic         30.4  75.7  1
-## Toyota Corolla      33.9  71.1  1
-## Toyota Corona       21.5 120.1  0
-## Dodge Challenger    15.5 318.0  0
-## AMC Javelin         15.2 304.0  0
-## Camaro Z28          13.3 350.0  0
-## Pontiac Firebird    19.2 400.0  0
-## Fiat X1-9           27.3  79.0  1
-## Porsche 914-2       26.0 120.3  1
-## Lotus Europa        30.4  95.1  1
-## Ford Pantera L      15.8 351.0  1
-## Ferrari Dino        19.7 145.0  1
-## Maserati Bora       15.0 301.0  1
-## Volvo 142E          21.4 121.0  1</code></pre>
+  select(mpg, displacement = disp, am)</code></pre>
+<pre><code>##                      mpg displacement am
+## Mazda RX4           21.0        160.0  1
+## Mazda RX4 Wag       21.0        160.0  1
+## Datsun 710          22.8        108.0  1
+## Hornet 4 Drive      21.4        258.0  0
+## Hornet Sportabout   18.7        360.0  0
+## Valiant             18.1        225.0  0
+## Duster 360          14.3        360.0  0
+## Merc 240D           24.4        146.7  0
+## Merc 230            22.8        140.8  0
+## Merc 280            19.2        167.6  0
+## Merc 280C           17.8        167.6  0
+## Merc 450SE          16.4        275.8  0
+## Merc 450SL          17.3        275.8  0
+## Merc 450SLC         15.2        275.8  0
+## Cadillac Fleetwood  10.4        472.0  0
+## Lincoln Continental 10.4        460.0  0
+## Chrysler Imperial   14.7        440.0  0
+## Fiat 128            32.4         78.7  1
+## Honda Civic         30.4         75.7  1
+## Toyota Corolla      33.9         71.1  1
+## Toyota Corona       21.5        120.1  0
+## Dodge Challenger    15.5        318.0  0
+## AMC Javelin         15.2        304.0  0
+## Camaro Z28          13.3        350.0  0
+## Pontiac Firebird    19.2        400.0  0
+## Fiat X1-9           27.3         79.0  1
+## Porsche 914-2       26.0        120.3  1
+## Lotus Europa        30.4         95.1  1
+## Ford Pantera L      15.8        351.0  1
+## Ferrari Dino        19.7        145.0  1
+## Maserati Bora       15.0        301.0  1
+## Volvo 142E          21.4        121.0  1</code></pre>
+<pre class="r"><code>mtcars |&gt;
+  select(mpg:drat)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat
+## Mazda RX4           21.0   6 160.0 110 3.90
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90
+## Datsun 710          22.8   4 108.0  93 3.85
+## Hornet 4 Drive      21.4   6 258.0 110 3.08
+## Hornet Sportabout   18.7   8 360.0 175 3.15
+## Valiant             18.1   6 225.0 105 2.76
+## Duster 360          14.3   8 360.0 245 3.21
+## Merc 240D           24.4   4 146.7  62 3.69
+## Merc 230            22.8   4 140.8  95 3.92
+## Merc 280            19.2   6 167.6 123 3.92
+## Merc 280C           17.8   6 167.6 123 3.92
+## Merc 450SE          16.4   8 275.8 180 3.07
+## Merc 450SL          17.3   8 275.8 180 3.07
+## Merc 450SLC         15.2   8 275.8 180 3.07
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93
+## Lincoln Continental 10.4   8 460.0 215 3.00
+## Chrysler Imperial   14.7   8 440.0 230 3.23
+## Fiat 128            32.4   4  78.7  66 4.08
+## Honda Civic         30.4   4  75.7  52 4.93
+## Toyota Corolla      33.9   4  71.1  65 4.22
+## Toyota Corona       21.5   4 120.1  97 3.70
+## Dodge Challenger    15.5   8 318.0 150 2.76
+## AMC Javelin         15.2   8 304.0 150 3.15
+## Camaro Z28          13.3   8 350.0 245 3.73
+## Pontiac Firebird    19.2   8 400.0 175 3.08
+## Fiat X1-9           27.3   4  79.0  66 4.08
+## Porsche 914-2       26.0   4 120.3  91 4.43
+## Lotus Europa        30.4   4  95.1 113 3.77
+## Ford Pantera L      15.8   8 351.0 264 4.22
+## Ferrari Dino        19.7   6 145.0 175 3.62
+## Maserati Bora       15.0   8 301.0 335 3.54
+## Volvo 142E          21.4   4 121.0 109 4.11</code></pre>
+<pre class="r"><code>#select() any 3 variables, can put columns in any order, the columns in front of the () will appear before
+mtcars |&gt;
+  select(drat, am, gear)</code></pre>
+<pre><code>##                     drat am gear
+## Mazda RX4           3.90  1    4
+## Mazda RX4 Wag       3.90  1    4
+## Datsun 710          3.85  1    4
+## Hornet 4 Drive      3.08  0    3
+## Hornet Sportabout   3.15  0    3
+## Valiant             2.76  0    3
+## Duster 360          3.21  0    3
+## Merc 240D           3.69  0    4
+## Merc 230            3.92  0    4
+## Merc 280            3.92  0    4
+## Merc 280C           3.92  0    4
+## Merc 450SE          3.07  0    3
+## Merc 450SL          3.07  0    3
+## Merc 450SLC         3.07  0    3
+## Cadillac Fleetwood  2.93  0    3
+## Lincoln Continental 3.00  0    3
+## Chrysler Imperial   3.23  0    3
+## Fiat 128            4.08  1    4
+## Honda Civic         4.93  1    4
+## Toyota Corolla      4.22  1    4
+## Toyota Corona       3.70  0    3
+## Dodge Challenger    2.76  0    3
+## AMC Javelin         3.15  0    3
+## Camaro Z28          3.73  0    3
+## Pontiac Firebird    3.08  0    3
+## Fiat X1-9           4.08  1    4
+## Porsche 914-2       4.43  1    5
+## Lotus Europa        3.77  1    5
+## Ford Pantera L      4.22  1    5
+## Ferrari Dino        3.62  1    5
+## Maserati Bora       3.54  1    5
+## Volvo 142E          4.11  1    4</code></pre>
+<pre class="r"><code>#select() last 3 variables
+
+mtcars |&gt;
+  select(am:carb)</code></pre>
+<pre><code>##                     am gear carb
+## Mazda RX4            1    4    4
+## Mazda RX4 Wag        1    4    4
+## Datsun 710           1    4    1
+## Hornet 4 Drive       0    3    1
+## Hornet Sportabout    0    3    2
+## Valiant              0    3    1
+## Duster 360           0    3    4
+## Merc 240D            0    4    2
+## Merc 230             0    4    2
+## Merc 280             0    4    4
+## Merc 280C            0    4    4
+## Merc 450SE           0    3    3
+## Merc 450SL           0    3    3
+## Merc 450SLC          0    3    3
+## Cadillac Fleetwood   0    3    4
+## Lincoln Continental  0    3    4
+## Chrysler Imperial    0    3    4
+## Fiat 128             1    4    1
+## Honda Civic          1    4    2
+## Toyota Corolla       1    4    1
+## Toyota Corona        0    3    1
+## Dodge Challenger     0    3    2
+## AMC Javelin          0    3    2
+## Camaro Z28           0    3    4
+## Pontiac Firebird     0    3    2
+## Fiat X1-9            1    4    1
+## Porsche 914-2        1    5    2
+## Lotus Europa         1    5    2
+## Ford Pantera L       1    5    4
+## Ferrari Dino         1    5    6
+## Maserati Bora        1    5    8
+## Volvo 142E           1    4    2</code></pre>
+<pre class="r"><code>#Use the select() to rename mpg
+mtcars |&gt;
+  select(hellow_world = mpg)</code></pre>
+<pre><code>##                     hellow_world
+## Mazda RX4                   21.0
+## Mazda RX4 Wag               21.0
+## Datsun 710                  22.8
+## Hornet 4 Drive              21.4
+## Hornet Sportabout           18.7
+## Valiant                     18.1
+## Duster 360                  14.3
+## Merc 240D                   24.4
+## Merc 230                    22.8
+## Merc 280                    19.2
+## Merc 280C                   17.8
+## Merc 450SE                  16.4
+## Merc 450SL                  17.3
+## Merc 450SLC                 15.2
+## Cadillac Fleetwood          10.4
+## Lincoln Continental         10.4
+## Chrysler Imperial           14.7
+## Fiat 128                    32.4
+## Honda Civic                 30.4
+## Toyota Corolla              33.9
+## Toyota Corona               21.5
+## Dodge Challenger            15.5
+## AMC Javelin                 15.2
+## Camaro Z28                  13.3
+## Pontiac Firebird            19.2
+## Fiat X1-9                   27.3
+## Porsche 914-2               26.0
+## Lotus Europa                30.4
+## Ford Pantera L              15.8
+## Ferrari Dino                19.7
+## Maserati Bora               15.0
+## Volvo 142E                  21.4</code></pre>
 <pre class="r"><code>#select()选择需要的列, filter()选择特定条件先的行列, mutate()添加新的列
+#rows of a dataframe with filter()
+#logical operators:
+#&lt;, &gt;, &lt;=, &gt;=, ==, !=(不等于), &amp;(and), |(or), %in%(in)
 mtcars |&gt;
-  select(mpg, poo = disp, am) |&gt;
+  select(mpg, displacement = disp, am) |&gt;
   filter(am == 1, mpg &gt;= 23) |&gt;
   mutate(mpg_100 = mpg + 100,
          z_mpg = (mpg-mean(mpg)) / sd(mpg)
   )</code></pre>
-<pre><code>##                 mpg   poo am mpg_100      z_mpg
-## Fiat 128       32.4  78.7  1   132.4  0.7816668
-## Honda Civic    30.4  75.7  1   130.4  0.1116667
-## Toyota Corolla 33.9  71.1  1   133.9  1.2841669
-## Fiat X1-9      27.3  79.0  1   127.3 -0.9268335
-## Porsche 914-2  26.0 120.3  1   126.0 -1.3623336
-## Lotus Europa   30.4  95.1  1   130.4  0.1116667</code></pre>
+<pre><code>##                 mpg displacement am mpg_100      z_mpg
+## Fiat 128       32.4         78.7  1   132.4  0.7816668
+## Honda Civic    30.4         75.7  1   130.4  0.1116667
+## Toyota Corolla 33.9         71.1  1   133.9  1.2841669
+## Fiat X1-9      27.3         79.0  1   127.3 -0.9268335
+## Porsche 914-2  26.0        120.3  1   126.0 -1.3623336
+## Lotus Europa   30.4         95.1  1   130.4  0.1116667</code></pre>
+<pre class="r"><code>#filter rows in which mpg is less than 20 and greater than 14
+filter(mtcars, mpg &gt; 14 &amp; mpg&lt; 20)</code></pre>
+<pre><code>##                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C         17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE        16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL        17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC       15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Dodge Challenger  15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin       15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Pontiac Firebird  19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Ford Pantera L    15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino      19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora     15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<pre class="r"><code>#filter rows in which cyl is equal to 6
+filter(mtcars, cyl == 6)</code></pre>
+<pre><code>##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Valiant        18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C      17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></pre>
+<pre class="r"><code>#filter rows in which mpg is greater than 20 or disp is less than 200
+filter(mtcars, mpg &gt; 20 | disp &lt; 200)</code></pre>
+<pre><code>##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C      17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 <pre class="r"><code>#aggregate summaries with &#39;group_by()&#39; and &#39;summaries&#39;
 mtcars |&gt;
   group_by(am) |&gt;
@@ -515,6 +731,350 @@ mtcars |&gt;
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     0  17.1  3.83
 ## 2     1  24.4  6.17</code></pre>
+<pre class="r"><code>#arrange rows of a dataframe with arrange(), arrange(my_data, weight), tell which columns you want arrange by, desc()倒序排列
+
+#arrange the mtcars dataset based on cyl and disp
+
+arrange(mtcars, cyl, disp)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4</code></pre>
+<pre class="r"><code>#wrong arrange(mtcars, cyl &amp; disp)
+arrange(mtcars, cyl &amp; disp)</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre class="r"><code>mtcars</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre class="r"><code>#arrange the mtcars dataset based on mpg from highest to lowest
+
+arrange(mtcars, desc(mpg))</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4</code></pre>
+<pre class="r"><code>#mutate variables of a dataframe with mutate(), add columns: mutate(my_data, new_col = &#39;hi&#39;)
+#mutate(my_data, smart = ifelse(iq &gt; 100, &quot;yes&quot;, &#39;no&#39;))
+
+#In the mtcars datasets, select the mpg column and then create a new column called mpg_x2 that doubles every value in the dataframe
+
+mtcars |&gt;
+  select(mpg) |&gt;
+  mutate(mpg_x2 = mpg*2)</code></pre>
+<pre><code>##                      mpg mpg_x2
+## Mazda RX4           21.0   42.0
+## Mazda RX4 Wag       21.0   42.0
+## Datsun 710          22.8   45.6
+## Hornet 4 Drive      21.4   42.8
+## Hornet Sportabout   18.7   37.4
+## Valiant             18.1   36.2
+## Duster 360          14.3   28.6
+## Merc 240D           24.4   48.8
+## Merc 230            22.8   45.6
+## Merc 280            19.2   38.4
+## Merc 280C           17.8   35.6
+## Merc 450SE          16.4   32.8
+## Merc 450SL          17.3   34.6
+## Merc 450SLC         15.2   30.4
+## Cadillac Fleetwood  10.4   20.8
+## Lincoln Continental 10.4   20.8
+## Chrysler Imperial   14.7   29.4
+## Fiat 128            32.4   64.8
+## Honda Civic         30.4   60.8
+## Toyota Corolla      33.9   67.8
+## Toyota Corona       21.5   43.0
+## Dodge Challenger    15.5   31.0
+## AMC Javelin         15.2   30.4
+## Camaro Z28          13.3   26.6
+## Pontiac Firebird    19.2   38.4
+## Fiat X1-9           27.3   54.6
+## Porsche 914-2       26.0   52.0
+## Lotus Europa        30.4   60.8
+## Ford Pantera L      15.8   31.6
+## Ferrari Dino        19.7   39.4
+## Maserati Bora       15.0   30.0
+## Volvo 142E          21.4   42.8</code></pre>
+<pre class="r"><code>#In the mtcars datasets, select the mpg column and then create a new column called mpg_c that centers the mpg data by subtracting the mean value of mpg from every value in dataframe
+
+mtcars |&gt;
+  select(mpg) |&gt;
+  mutate(mpg_c = mpg - mean(mpg))</code></pre>
+<pre><code>##                      mpg     mpg_c
+## Mazda RX4           21.0  0.909375
+## Mazda RX4 Wag       21.0  0.909375
+## Datsun 710          22.8  2.709375
+## Hornet 4 Drive      21.4  1.309375
+## Hornet Sportabout   18.7 -1.390625
+## Valiant             18.1 -1.990625
+## Duster 360          14.3 -5.790625
+## Merc 240D           24.4  4.309375
+## Merc 230            22.8  2.709375
+## Merc 280            19.2 -0.890625
+## Merc 280C           17.8 -2.290625
+## Merc 450SE          16.4 -3.690625
+## Merc 450SL          17.3 -2.790625
+## Merc 450SLC         15.2 -4.890625
+## Cadillac Fleetwood  10.4 -9.690625
+## Lincoln Continental 10.4 -9.690625
+## Chrysler Imperial   14.7 -5.390625
+## Fiat 128            32.4 12.309375
+## Honda Civic         30.4 10.309375
+## Toyota Corolla      33.9 13.809375
+## Toyota Corona       21.5  1.409375
+## Dodge Challenger    15.5 -4.590625
+## AMC Javelin         15.2 -4.890625
+## Camaro Z28          13.3 -6.790625
+## Pontiac Firebird    19.2 -0.890625
+## Fiat X1-9           27.3  7.209375
+## Porsche 914-2       26.0  5.909375
+## Lotus Europa        30.4 10.309375
+## Ford Pantera L      15.8 -4.290625
+## Ferrari Dino        19.7 -0.390625
+## Maserati Bora       15.0 -5.090625
+## Volvo 142E          21.4  1.309375</code></pre>
+<pre class="r"><code>#create a new column called value that applies the label &#39;good&#39; to cars that get over 18 mpg and the label &#39;bad&#39; to cars that get mpg 18 or less
+
+mtcars |&gt;
+  select(mpg) |&gt;
+  mutate(value = if_else(
+    condition = mpg &gt; 18,
+    true = &#39;good&#39;,
+    false = &#39;bad&#39;))</code></pre>
+<pre><code>##                      mpg value
+## Mazda RX4           21.0  good
+## Mazda RX4 Wag       21.0  good
+## Datsun 710          22.8  good
+## Hornet 4 Drive      21.4  good
+## Hornet Sportabout   18.7  good
+## Valiant             18.1  good
+## Duster 360          14.3   bad
+## Merc 240D           24.4  good
+## Merc 230            22.8  good
+## Merc 280            19.2  good
+## Merc 280C           17.8   bad
+## Merc 450SE          16.4   bad
+## Merc 450SL          17.3   bad
+## Merc 450SLC         15.2   bad
+## Cadillac Fleetwood  10.4   bad
+## Lincoln Continental 10.4   bad
+## Chrysler Imperial   14.7   bad
+## Fiat 128            32.4  good
+## Honda Civic         30.4  good
+## Toyota Corolla      33.9  good
+## Toyota Corona       21.5  good
+## Dodge Challenger    15.5   bad
+## AMC Javelin         15.2   bad
+## Camaro Z28          13.3   bad
+## Pontiac Firebird    19.2  good
+## Fiat X1-9           27.3  good
+## Porsche 914-2       26.0  good
+## Lotus Europa        30.4  good
+## Ford Pantera L      15.8   bad
+## Ferrari Dino        19.7  good
+## Maserati Bora       15.0   bad
+## Volvo 142E          21.4  good</code></pre>
+<pre class="r"><code>mtcars |&gt;
+  select(mpg) |&gt;
+  mutate(value = if_else( mpg &gt; 18, &#39;good&#39;,&#39;bad&#39;))</code></pre>
+<pre><code>##                      mpg value
+## Mazda RX4           21.0  good
+## Mazda RX4 Wag       21.0  good
+## Datsun 710          22.8  good
+## Hornet 4 Drive      21.4  good
+## Hornet Sportabout   18.7  good
+## Valiant             18.1  good
+## Duster 360          14.3   bad
+## Merc 240D           24.4  good
+## Merc 230            22.8  good
+## Merc 280            19.2  good
+## Merc 280C           17.8   bad
+## Merc 450SE          16.4   bad
+## Merc 450SL          17.3   bad
+## Merc 450SLC         15.2   bad
+## Cadillac Fleetwood  10.4   bad
+## Lincoln Continental 10.4   bad
+## Chrysler Imperial   14.7   bad
+## Fiat 128            32.4  good
+## Honda Civic         30.4  good
+## Toyota Corolla      33.9  good
+## Toyota Corona       21.5  good
+## Dodge Challenger    15.5   bad
+## AMC Javelin         15.2   bad
+## Camaro Z28          13.3   bad
+## Pontiac Firebird    19.2  good
+## Fiat X1-9           27.3  good
+## Porsche 914-2       26.0  good
+## Lotus Europa        30.4  good
+## Ford Pantera L      15.8   bad
+## Ferrari Dino        19.7  good
+## Maserati Bora       15.0   bad
+## Volvo 142E          21.4  good</code></pre>
+<pre class="r"><code>#create new column called opinion if mpg greater than 20 then &#39;good&#39;, 
+#if mpg less then 20 but greater than 15 then &#39;meh&#39;
+#if mpg less than 15 then &#39;bad&#39;
+
+mtcars |&gt;
+  select(mpg) |&gt;
+  mutate(
+    opinion = case_when(mpg &gt;= 20           ~&#39;good&#39;,
+                        mpg &lt; 20 &amp; mpg &gt; 15 ~&#39;meh&#39;,
+                        mpg &lt;= 15           ~&#39;bad&#39;)) |&gt;
+  ggplot()+
+  aes(x = opinion, y = mpg) + 
+  geom_boxplot()</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
+<pre class="r"><code>#summarize variables of a dataframe with summarize(my_data, mean_weight = mean(weight))
+#group_by(),按照什么分组
+
+#Calculate the mean value of mpg in the dataset mtcars
+mtcars |&gt;
+  summarize(avg = mean(mpg))</code></pre>
+<pre><code>##        avg
+## 1 20.09062</code></pre>
+<pre class="r"><code>#Calculate the mean value of mpg as a function of cyl
+mtcars |&gt;
+  group_by(cyl) |&gt;
+  summarize(avg = mean(mpg))</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     cyl   avg
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     4  26.7
+## 2     6  19.7
+## 3     8  15.1</code></pre>
+<pre class="r"><code>#Calculate the mean, standard deviation, min and max of mpg as a function of cyl
+mtcars |&gt;
+  group_by(cyl) |&gt;
+  summarize(avg = mean(mpg),
+            std = sd(mpg),
+            mn = min(mpg),
+            mx = max(mpg))</code></pre>
+<pre><code>## # A tibble: 3 × 5
+##     cyl   avg   std    mn    mx
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     4  26.7  4.51  21.4  33.9
+## 2     6  19.7  1.45  17.8  21.4
+## 3     8  15.1  2.56  10.4  19.2</code></pre>
 
 
 
