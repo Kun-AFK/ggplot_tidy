@@ -9,6 +9,7 @@ output: html_document
 #| label: load-libs
 
 library("tidyverse")
+library("untidydata")
 
 ```
 
@@ -183,4 +184,57 @@ mtcars |>
 
 ```
 
+
+```{r}
+#tidyr
+library("untidydata")
+
+#separate()，将一列分成多列
+pre_post |>
+  separate(
+    col = id,
+    into = c("lang", "Num"), 
+    sep = 4,#从四个单位字符那里分开
+    remove = FALSE
+  ) |>
+  separate(
+    col = spec,
+    into = c("group", "prof"),
+    sep = "_"
+  )
+
+#unite()，将多列合成一列
+
+#pivot_longer(), 将短的dataframe变成长的
+#pivot_wider(),将长的变成短的数据框
+pre_post |>
+  pivot_longer(
+    col = c("test1", "test2"),
+    names_to = "test",
+    values_to = "scores",
+  ) |>
+  pivot_wider(
+    names_from = test,
+    values_from = scores,
+  ) |>
+  mutate(diff = test1 -test2)
+  
+language_diversity |>
+  pivot_wider(
+    names_from = Measurement,
+    values_from = Value,
+  )|>
+  write_csv("./data/lang_tidy.csv")
+
+lng_div <- read_csv("./data/lang_tidy.csv")
+
+lng_div 
+
+
+#loading and saving data read_csv() and write_csv
+
+
+
+
+```
 

@@ -368,6 +368,7 @@ display: none;
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(&quot;untidydata&quot;)</code></pre>
 <pre class="r"><code>glimpse(mtcars)</code></pre>
 <pre><code>## Rows: 32
 ## Columns: 11
@@ -1075,6 +1076,107 @@ mtcars |&gt;
 ## 1     4  26.7  4.51  21.4  33.9
 ## 2     6  19.7  1.45  17.8  21.4
 ## 3     8  15.1  2.56  10.4  19.2</code></pre>
+<pre class="r"><code>#tidyr
+library(&quot;untidydata&quot;)
+
+#separate()，将一列分成多列
+pre_post |&gt;
+  separate(
+    col = id,
+    into = c(&quot;lang&quot;, &quot;Num&quot;), 
+    sep = 4,#从四个单位字符那里分开
+    remove = FALSE
+  ) |&gt;
+  separate(
+    col = spec,
+    into = c(&quot;group&quot;, &quot;prof&quot;),
+    sep = &quot;_&quot;
+  )</code></pre>
+<pre><code>## # A tibble: 16 × 7
+##    id     lang  Num   group prof  test1 test2
+##    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 span01 span  01    g1    lo     64.3  69.2
+##  2 span02 span  02    g1    lo     59.8  63.7
+##  3 span03 span  03    g1    hi     66.1  70.9
+##  4 span04 span  04    g1    hi     72.8  79.2
+##  5 span05 span  05    g2    lo     68.3  75.4
+##  6 span06 span  06    g2    lo     69.2  76.7
+##  7 span07 span  07    g2    hi     71.4  77.2
+##  8 span08 span  08    g2    hi     80.4  88.9
+##  9 cata01 cata  01    g1    lo     75.6  83.6
+## 10 cata02 cata  02    g1    lo     71.2  78.8
+## 11 cata03 cata  03    g1    hi     69.1  74.6
+## 12 cata04 cata  04    g1    hi     72.4  80.7
+## 13 cata05 cata  05    g2    lo     71.7  77.9
+## 14 cata06 cata  06    g2    lo     69.0  75  
+## 15 cata07 cata  07    g2    hi     69.9  76  
+## 16 cata08 cata  08    g2    hi     77.3  85.6</code></pre>
+<pre class="r"><code>#unite()，将多列合成一列
+
+#pivot_longer(), 将短的dataframe变成长的
+#pivot_wider(),将长的变成短的数据框
+pre_post |&gt;
+  pivot_longer(
+    col = c(&quot;test1&quot;, &quot;test2&quot;),
+    names_to = &quot;test&quot;,
+    values_to = &quot;scores&quot;,
+  ) |&gt;
+  pivot_wider(
+    names_from = test,
+    values_from = scores,
+  ) |&gt;
+  mutate(diff = test1 -test2)</code></pre>
+<pre><code>## # A tibble: 16 × 5
+##    id     spec  test1 test2  diff
+##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 span01 g1_lo  64.3  69.2 -4.89
+##  2 span02 g1_lo  59.8  63.7 -3.89
+##  3 span03 g1_hi  66.1  70.9 -4.82
+##  4 span04 g1_hi  72.8  79.2 -6.42
+##  5 span05 g2_lo  68.3  75.4 -7.11
+##  6 span06 g2_lo  69.2  76.7 -7.48
+##  7 span07 g2_hi  71.4  77.2 -5.84
+##  8 span08 g2_hi  80.4  88.9 -8.53
+##  9 cata01 g1_lo  75.6  83.6 -7.97
+## 10 cata02 g1_lo  71.2  78.8 -7.55
+## 11 cata03 g1_hi  69.1  74.6 -5.51
+## 12 cata04 g1_hi  72.4  80.7 -8.35
+## 13 cata05 g2_lo  71.7  77.9 -6.24
+## 14 cata06 g2_lo  69.0  75   -5.99
+## 15 cata07 g2_hi  69.9  76   -6.14
+## 16 cata08 g2_hi  77.3  85.6 -8.26</code></pre>
+<pre class="r"><code>language_diversity |&gt;
+  pivot_wider(
+    names_from = Measurement,
+    values_from = Value,
+  )|&gt;
+  write_csv(&quot;./data/lang_tidy.csv&quot;)
+
+lng_div &lt;- read_csv(&quot;./data/lang_tidy.csv&quot;)</code></pre>
+<pre><code>## Rows: 74 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): Continent, Country
+## dbl (6): Langs, Area, Population, Stations, MGS, Std
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>lng_div </code></pre>
+<pre><code>## # A tibble: 74 × 8
+##    Continent Country      Langs    Area Population Stations   MGS   Std
+##    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Africa    Algeria         18 2381741      25660      102  6.6   2.29
+##  2 Africa    Angola          42 1246700      10303       50  6.22  1.87
+##  3 Oceania   Australia      234 7713364      17336      134  6     4.17
+##  4 Asia      Bangladesh      37  143998     118745       20  7.4   0.73
+##  5 Africa    Benin           52  112622       4889        7  7.14  0.99
+##  6 Americas  Bolivia         38 1098581       7612       48  6.92  2.5 
+##  7 Africa    Botswana        27  581730       1348       10  4.6   1.69
+##  8 Americas  Brazil         209 8511965     153322      245  9.71  5.87
+##  9 Africa    Burkina Faso    75  274000       9242        6  5.17  1.07
+## 10 Africa    CAR             94  622984       3127       13  8.08  1.21
+## # ℹ 64 more rows</code></pre>
+<pre class="r"><code>#loading and saving data read_csv() and write_csv</code></pre>
 
 
 
